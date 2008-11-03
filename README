@@ -1,0 +1,50 @@
+NAME
+    Path::Finder -
+
+VERSION
+    Version 0.01
+
+SYNOPSIS
+AUTHOR
+    Robert Krimen, "<rkrimen at cpan.org>"
+
+SOURCE
+    You can contribute or fork this project via GitHub:
+
+    <http://github.com/robertkrimen/path-finder/tree/master>
+
+        git clone git://github.com/robertkrimen/path-finder.git Path-Finder
+
+BUGS
+    Please report any bugs or feature requests to "bug-path-finder at
+    rt.cpan.org", or through the web interface at
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Path-Finder>. I will be
+    notified, and then you'll automatically be notified of progress on your
+    bug as I make changes.
+
+SUPPORT
+    You can find documentation for this module with the perldoc command.
+
+        perldoc Path::Finder
+
+    You can also look for information at:
+
+    * RT: CPAN's request tracker
+        <http://rt.cpan.org/NoAuth/Bugs.html?Dist=Path-Finder>
+
+    * AnnoCPAN: Annotated CPAN documentation
+        <http://annocpan.org/dist/Path-Finder>
+
+    * CPAN Ratings
+        <http://cpanratings.perl.org/d/Path-Finder>
+
+    * Search CPAN
+        <http://search.cpan.org/dist/Path-Finder>
+
+ACKNOWLEDGEMENTS
+COPYRIGHT & LICENSE
+    Copyright 2008 Robert Krimen, all rights reserved.
+
+    This program is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+

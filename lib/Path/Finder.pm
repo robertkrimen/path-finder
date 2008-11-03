@@ -5,7 +5,7 @@ use strict;
 
 =head1 NAME
 
-Path::Finder - The great new Path::Finder!
+Path::Finder -
 
 =head1 VERSION
 
@@ -15,42 +15,69 @@ Version 0.01
 
 our $VERSION = '0.01';
 
-
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
-
-    use Path::Finder;
-
-    my $foo = Path::Finder->new();
-    ...
-
-=head1 EXPORT
-
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
-
-=head1 FUNCTIONS
-
-=head2 function1
-
 =cut
 
-sub function1 {
+use Moose;
+
+use Path::Finder::Target;
+use Path::Finder::Match;
+
+has targets => qw/reader _targets required 1 isa ArrayRef/, default => sub { [] };
+has __sorted_targets => qw/is rw isa Maybe[ArrayRef]/;
+
+sub target {
+    my $self = shift;
+    my $target = Path::Finder::Target->new(@_);
+    push @{ $self->_targets }, $target;
+    $self->__sorted_targets(undef);
 }
 
-=head2 function2
+sub _sorted_targets {
+    my $self = shift;
 
-=cut
+    my $sorted = $self->__sorted_targets;
+    return @$sorted if $sorted;
 
-sub function2 {
+    my @sorted =
+    sort {
+        $b->rank cmp $a->rank or
+        $b->length cmp $a->length
+    }
+    @{ $self->_targets };
+
+    $self->__sorted_targets(\@sorted);
+
+    return @sorted;
+}
+
+sub find {
+    my $self = shift;
+    my $path = shift;
+
+    my $match = Path::Finder::Match->new;
+    my @targets = $self->_sorted_targets;
+    for my $target (@targets) {
+        if ($target->match($path)) {
+            $match->add($target);
+        }
+    }
+    return $match if $match->found;
+    return undef;
 }
 
 =head1 AUTHOR
 
 Robert Krimen, C<< <rkrimen at cpan.org> >>
+
+=head1 SOURCE
+
+You can contribute or fork this project via GitHub:
+
+L<http://github.com/robertkrimen/path-finder/tree/master>
+
+    git clone git://github.com/robertkrimen/path-finder.git Path-Finder
 
 =head1 BUGS
 
